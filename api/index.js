@@ -3,6 +3,10 @@ import OpenAI from "openai";
 const openai = new OpenAI({
   apiKey: process.env.OPENAIKEY
 });
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
 
 async function handleRequestTest(req, res) {
   try {
@@ -32,7 +36,21 @@ async function handleRequestGPT4(req, res) {
   }
 }
 
-export {
-  handleRequestTest,
-  handleRequestGPT4
-};
+app.use(express.json());
+
+app.use(cors()); // Enable All CORS Requests
+
+app.options('*', cors()) // Enable CORS preflight for all routes 测试跨域的时候开启这个地方
+
+//Ending points
+
+app.get("/handleRequestTest", handleRequestTest);
+
+
+app.post("/handleRequestGPT4", handleRequestGPT4);
+
+//Functions write here
+
+app.listen(8080, function () {
+  console.log("Server is running on port 8080");
+});

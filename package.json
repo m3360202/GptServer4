@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "babel-node index.js",
-    "build": "node build.js",
-    "start": "node public/index.js",
-    "vercel": "npm run dev"
+    "dev": "babel-node api/index.js",
+    "start": "babel-node api/index.js"
   },
   "repository": {
     "type": "git",
