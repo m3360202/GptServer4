@@ -7,7 +7,8 @@
     "test": "jest",
     "dev": "babel-node index.js",
     "build": "node build.js",
-    "start": "node public/index.js"
+    "start": "node public/index.js",
+    "vercel": "npm run dev"
   },
   "repository": {
     "type": "git",
