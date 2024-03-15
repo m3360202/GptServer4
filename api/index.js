@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const endpoint = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 const express = require("express");
 const cors = require("cors");
