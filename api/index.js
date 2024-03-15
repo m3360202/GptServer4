@@ -1,7 +1,6 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAIKEY
+const OpenAI = require("openai");
+const endpoint = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
 });
 const express = require("express");
 const cors = require("cors");
@@ -24,7 +23,7 @@ async function handleRequestGPT4(req, res) {
   try {
     
     const { prompt } = req.body;
-    const completion = await openai.chat.completions.create({
+    const completion = await endpoint.chat.completions.create({
       messages: prompt,
       model: "gpt-4-turbo",
     });
