@@ -25,6 +25,7 @@ async function handleRequestGPT4(req, res) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       },
+      
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
         messages: prompt,
