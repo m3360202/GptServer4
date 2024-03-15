@@ -1,10 +1,6 @@
-const OpenAI = require("openai");
-const endpoint = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 const express = require("express");
 const cors = require("cors");
-
+const fetch = require("node-fetch");
 const app = express();
 
 async function handleRequestTest(req, res) {
@@ -20,19 +16,27 @@ async function handleRequestTest(req, res) {
 }
 
 async function handleRequestGPT4(req, res) {
-  try {
     
     const { prompt } = req.body;
-    const completion = await endpoint.chat.completions.create({
-      messages: prompt,
-      model: "gpt-4-turbo",
+    fetch('https://api.openai.com/v1/engines/gpt-4-turbo-preview/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        max_tokens: 150,
+      }),
+    }).then(data => {
+      console.log('Success:', data);
+      res.status(200).json(data);
+    }).catch((error) => {
+      console.error('Error:', error);
+      res.status(500).json({ error: error.message });
     });
 
-    res.status(200).json(completion.choices[0]);
-  } catch (error) {
-    console.error('error---',error.message); // 只记录错误消息
-  res.status(506).json({ error: error.message });
-  }
+
 }
 
 app.use(express.json());

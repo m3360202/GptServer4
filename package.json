@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/m3360202/avaService#readme",
   "dependencies": {
+    "axios": "^1.6.8",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "openai": "^4.4.0"
