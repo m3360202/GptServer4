@@ -18,15 +18,17 @@ async function handleRequestTest(req, res) {
 async function handleRequestGPT4(req, res) {
     
     const { prompt } = req.body;
-    fetch('https://api.openai.com/v1/gpt-4-turbo-preview/completions', {
+    console.log('prompt', prompt)
+    fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        prompt: prompt,
-        max_tokens: 150,
+        model: 'gpt-3.5-turbo',
+        messages: prompt,
+        temperature: 0.2
       }),
     }).then(data => {
       console.log('Success:', data);
