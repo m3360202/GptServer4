@@ -18,7 +18,7 @@ async function handleRequestTest(req, res) {
 async function handleRequestGPT4(req, res) {
     
     const { prompt } = req.body;
-    fetch('https://api.openai.com/v1/engines/gpt-4-turbo-preview/completions', {
+    fetch('https://api.openai.com/v1/gpt-4-turbo-preview/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
