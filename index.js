@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import fetch from "node-fetch";
+import axios from "axios";
 const app = express();
 
 async function handleRequestTest(req, res) {
@@ -19,8 +19,7 @@ async function handleRequestGPT4(req, res) {
     
     const { prompt } = req.body;
     console.log('prompt', prompt)
-    fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
+    axios.post('https://api.openai.com/v1/chat/completions', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -31,12 +30,7 @@ async function handleRequestGPT4(req, res) {
         messages: prompt,
         temperature: 0.2
       },
-    }).then(response => {
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
-      return response.json(); // Convert response to JSON
-  }).then(data => {
+    }).then(data => {
       res.status(200).json(data); // Now 'data' should contain JSON data
   }).catch((error) => {
       console.error('Error:', error);
@@ -50,8 +44,7 @@ async function handleRequestGPT3(req, res) {
     
   const { prompt } = req.body;
   console.log('prompt', prompt)
-  fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
+  axios.post('https://api.openai.com/v1/chat/completions', {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -62,12 +55,7 @@ async function handleRequestGPT3(req, res) {
       messages: prompt,
       temperature: 0.2
     },
-  }).then(response => {
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json(); // Convert response to JSON
-}).then(data => {
+  }).then(data => {
     res.status(200).json(data); // Now 'data' should contain JSON data
 }).catch((error) => {
     console.error('Error:', error);
