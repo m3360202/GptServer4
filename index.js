@@ -16,53 +16,49 @@ async function handleRequestTest(req, res) {
 }
 
 async function handleRequestGPT4(req, res) {
-    
-    const { prompt } = req.body;
-    console.log('prompt', prompt)
-    axios.post('https://api.openai.com/v1/chat/completions', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      
-      body: {
-        model: 'gpt-4-0125-preview',
-        messages: prompt,
-        temperature: 0.2
-      },
-    }).then(data => {
-      res.status(200).json(data); // Now 'data' should contain JSON data
-  }).catch((error) => {
+  const { prompt } = req.body;
+  console.log('prompt', prompt);
+
+  try {
+      const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+          model: 'gpt-4-0125-preview',
+          messages: prompt,
+          temperature: 0.2
+      }, {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          }
+      });
+
+      res.status(200).json(response.data);
+  } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
-    });
-
-
+  }
 }
 
-async function handleRequestGPT3(req, res) {
-    
+async function handleRequestGPT4(req, res) {
   const { prompt } = req.body;
-  console.log('prompt', prompt)
-  axios.post('https://api.openai.com/v1/chat/completions', {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-    },
-    
-    body: {
-      model: 'gpt-3.5-turbo',
-      messages: prompt,
-      temperature: 0.2
-    },
-  }).then(data => {
-    res.status(200).json(data); // Now 'data' should contain JSON data
-}).catch((error) => {
-    console.error('Error:', error);
-    res.status(500).json({ error: error.message });
-  });
+  console.log('prompt', prompt);
 
+  try {
+      const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+          model: 'gpt-3.5-turbo',
+          messages: prompt,
+          temperature: 0.2
+      }, {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          }
+      });
 
+      res.status(200).json(response.data);
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: error.message });
+  }
 }
 
 app.use(express.json());
