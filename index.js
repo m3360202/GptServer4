@@ -32,8 +32,9 @@ async function handleRequestGPT4(req, res) {
         temperature: 0.2
       }),
     }).then(data => {
-      console.log('Success:', data);
-      res.status(200).json(data);
+      const newData = {data,prompt}
+
+      res.status(200).json(newData);
     }).catch((error) => {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
