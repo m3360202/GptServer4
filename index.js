@@ -31,7 +31,7 @@ async function handleRequestGPT4(req, res) {
           }
       });
 
-      res.status(200).json(response.data.choices[0].message.content);
+      res.status(200).json(response);
   } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
@@ -54,7 +54,7 @@ async function handleRequestGPT3(req, res) {
           }
       });
 
-      res.status(200).json(response.data.choices[0].message.content);
+      res.status(200).json(response);
   } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
