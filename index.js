@@ -31,11 +31,14 @@ async function handleRequestGPT4(req, res) {
         messages: prompt,
         temperature: 0.2
       },
-    }).then(data => {
-      const newData = {data,prompt}
-
-      res.status(200).json(newData);
-    }).catch((error) => {
+    }).then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.json(); // Convert response to JSON
+  }).then(data => {
+      res.status(200).json(data); // Now 'data' should contain JSON data
+  }).catch((error) => {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
     });
@@ -59,11 +62,14 @@ async function handleRequestGPT3(req, res) {
       messages: prompt,
       temperature: 0.2
     },
-  }).then(data => {
-    const newData = {data,prompt}
-
-    res.status(200).json(newData);
-  }).catch((error) => {
+  }).then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json(); // Convert response to JSON
+}).then(data => {
+    res.status(200).json(data); // Now 'data' should contain JSON data
+}).catch((error) => {
     console.error('Error:', error);
     res.status(500).json({ error: error.message });
   });
