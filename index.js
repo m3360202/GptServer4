@@ -1,6 +1,6 @@
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
+import express from "express";
+import cors from "cors";
+import fetch from "node-fetch";
 const app = express();
 
 async function handleRequestTest(req, res) {
@@ -27,7 +27,7 @@ async function handleRequestGPT4(req, res) {
       },
       
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4-turbo-preview',
         messages: prompt,
         temperature: 0.2
       }),
