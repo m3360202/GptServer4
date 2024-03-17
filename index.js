@@ -26,11 +26,11 @@ async function handleRequestGPT4(req, res) {
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       
-      body: JSON.stringify({
+      body: {
         model: 'gpt-4-0125-preview',
         messages: prompt,
         temperature: 0.2
-      }),
+      },
     }).then(data => {
       const newData = {data,prompt}
 
@@ -54,11 +54,11 @@ async function handleRequestGPT3(req, res) {
       'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
     },
     
-    body: JSON.stringify({
+    body: {
       model: 'gpt-3.5-turbo',
       messages: prompt,
       temperature: 0.2
-    }),
+    },
   }).then(data => {
     const newData = {data,prompt}
 
