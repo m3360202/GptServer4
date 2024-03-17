@@ -27,7 +27,7 @@ async function handleRequestGPT4(req, res) {
       },
       
       body: JSON.stringify({
-        model: 'gpt-4-turbo-preview',
+        model: 'gpt-4-0125-preview',
         messages: prompt,
         temperature: 0.2
       }),
@@ -39,6 +39,34 @@ async function handleRequestGPT4(req, res) {
       console.error('Error:', error);
       res.status(500).json({ error: error.message });
     });
+
+
+}
+
+async function handleRequestGPT3(req, res) {
+    
+  const { prompt } = req.body;
+  console.log('prompt', prompt)
+  fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages: prompt,
+      temperature: 0.2
+    }),
+  }).then(data => {
+    const newData = {data,prompt}
+
+    res.status(200).json(newData);
+  }).catch((error) => {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.message });
+  });
 
 
 }
@@ -55,6 +83,7 @@ app.get("/handleRequestTest", handleRequestTest);
 
 
 app.post("/handleRequestGPT4", handleRequestGPT4);
+app.post("/handleRequestGPT3", handleRequestGPT3);
 
 //Functions write here
 
