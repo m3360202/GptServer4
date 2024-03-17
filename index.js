@@ -38,7 +38,7 @@ async function handleRequestGPT4(req, res) {
   }
 }
 
-async function handleRequestGPT4(req, res) {
+async function handleRequestGPT3(req, res) {
   const { prompt } = req.body;
   console.log('prompt', prompt);
 
