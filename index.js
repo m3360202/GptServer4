@@ -45,7 +45,7 @@ async function handleRequestClaude(req, res) {
   try {
       const response = await axios.post('https://api.anthropic.com/v1/messages', {
           model: 'claude-3-opus-20240229',
-          messages: prompt,
+          prompt,
           temperature: 0.2
       }, {
           headers: {
