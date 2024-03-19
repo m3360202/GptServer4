@@ -38,6 +38,29 @@ async function handleRequestGPT4(req, res) {
   }
 }
 
+async function handleRequestClaude(req, res) {
+  const { prompt } = req.body;
+  console.log('prompt', prompt);
+
+  try {
+      const response = await axios.post('https://api.anthropic.com/v1/messages', {
+          model: 'claude-3-opus-20240229',
+          messages: prompt,
+          temperature: 0.2
+      }, {
+          headers: {
+              'Content-Type': 'application/json',
+              'X-API-Key': `${process.env.CLAUDE_KEY}`,
+          }
+      });
+
+      res.status(200).json(response.data);
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: error.message });
+  }
+}
+
 async function handleRequestGPT3(req, res) {
   const { prompt } = req.body;
   console.log('prompt', prompt);
