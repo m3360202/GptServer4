@@ -94,7 +94,7 @@ app.options('*', cors()) // Enable CORS preflight for all routes 测试跨域的
 
 app.get("/handleRequestTest", handleRequestTest);
 
-
+app.post("/handleRequestClaude",handleRequestClaude);
 app.post("/handleRequestGPT4", handleRequestGPT4);
 app.post("/handleRequestGPT3", handleRequestGPT3);
 
