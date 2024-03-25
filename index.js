@@ -42,7 +42,7 @@ async function handleRequestClaude(req, res) {
     const { prompt } = req.body;
 
     try {
-        const key = process.env.CLAUDE_KEY2;
+        const key = process.env.CLAUDE_API_KEY;
         const response = await axios.post('https://api.anthropic.com/v1/messages', {
             model: 'claude-2.1',
             messages: prompt,
